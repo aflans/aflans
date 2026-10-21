@@ -1,0 +1,363 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Aflans</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+  /* Layout: один длинный скролл, левое выравнивание, стеклянные карточки поверх мягких цветовых пятен. Тема одна, светлая, по брифу. */
+  :root {
+    --bg: #FFFFFF;
+    --ink: #0A255C;
+    --accent: #FF7A00;
+    --mute: #8A8A8E;
+    --body: #43557C;
+    --surface: #F3F6FC;
+    --line: rgba(10, 37, 92, 0.10);
+    --glass: rgba(255, 255, 255, 0.62);
+    --glass-edge: rgba(255, 255, 255, 0.85);
+    --shadow: 0 18px 50px -18px rgba(10, 37, 92, 0.22);
+    --font: "Manrope", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+    --r-lg: 28px;
+    --r-md: 20px;
+    --r-pill: 999px;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+
+  .wrap {
+    width: 100%;
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  /* Header */
+  .top {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 9;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border-bottom: 1px solid var(--line);
+  }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; text-decoration: none; }
+  .logo-img { width: 40px; height: 40px; object-fit: contain; mix-blend-mode: multiply; display: block; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 0 24px;
+    border-radius: var(--r-pill);
+    font: 700 16px/1 var(--font);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-accent { background: var(--accent); color: var(--ink); box-shadow: 0 12px 28px -10px rgba(255, 122, 0, 0.7); }
+  .btn-accent:hover { box-shadow: 0 16px 34px -10px rgba(255, 122, 0, 0.85); }
+  .btn-glass { background: var(--glass); color: var(--ink); border-color: var(--line); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .btn-sm { min-height: 40px; padding: 0 18px; font-size: 15px; }
+  .btn-xl { min-height: 64px; padding: 0 40px; font-size: 19px; }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; padding-block: clamp(48px, 9vw, 112px) clamp(56px, 8vw, 104px); }
+  .blob { position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none; }
+  .blob.a { width: 420px; height: 420px; right: -80px; top: -60px; background: rgba(255, 122, 0, 0.30); }
+  .blob.b { width: 360px; height: 360px; right: 18%; bottom: -140px; background: rgba(10, 37, 92, 0.16); }
+  .blob.c { width: 260px; height: 260px; left: -90px; top: 30%; background: rgba(255, 122, 0, 0.14); }
+  .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: clamp(32px, 5vw, 64px); align-items: center; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--body); margin: 0 0 20px; }
+  .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  h1 { font-size: clamp(38px, 6.4vw, 72px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 800; margin: 0 0 24px; text-wrap: balance; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lead { font-size: clamp(18px, 2.2vw, 21px); color: var(--body); max-width: 34em; margin: 0 0 36px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-edge);
+    box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(22px) saturate(1.5);
+    -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  }
+  .snap { border-radius: var(--r-lg); padding: 24px; min-width: 0; }
+  .snap-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .snap-title { font-weight: 800; font-size: 17px; letter-spacing: -0.01em; }
+  .snap-tag { font-size: 12px; font-weight: 600; color: var(--mute); }
+  .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 15px; }
+  .row span:first-child { color: var(--body); }
+  .row b { font-variant-numeric: tabular-nums; font-weight: 800; }
+  .row b.zero { color: var(--accent); }
+  .snap-foot { margin: 14px 0 0; font-size: 13px; color: var(--mute); }
+
+  /* Sections */
+  section { padding-block: clamp(56px, 8vw, 104px); }
+  .tint { background: var(--surface); }
+  h2 { font-size: clamp(30px, 4.6vw, 52px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 800; margin: 0 0 20px; text-wrap: balance; max-width: 18em; }
+  .sec-text { font-size: clamp(18px, 2vw, 21px); color: var(--body); max-width: 36em; margin: 0; }
+  .label { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+
+  /* Problem */
+  .versus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+  .vs { border-radius: var(--r-lg); padding: 28px; min-width: 0; }
+  .vs small { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); margin-bottom: 12px; }
+  .vs p { margin: 0; font-size: clamp(18px, 2.2vw, 23px); line-height: 1.35; font-weight: 700; letter-spacing: -0.015em; overflow-wrap: anywhere; }
+  .vs.client { background: var(--ink); border-color: var(--ink); color: #fff; box-shadow: var(--shadow); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .vs.client small { color: rgba(255, 255, 255, 0.6); }
+  .vs.client p::after { content: ""; display: block; width: 36px; height: 4px; border-radius: 4px; background: var(--accent); margin-top: 18px; }
+
+  /* Services */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 44px; }
+  .card { border-radius: var(--r-lg); padding: 30px 28px; display: flex; flex-direction: column; gap: 12px; min-width: 0; transition: transform .25s ease; }
+  .card:hover { transform: translateY(-4px); }
+  .card h3 { margin: 0; font-size: 24px; letter-spacing: -0.02em; font-weight: 800; }
+  .card p { margin: 0; color: var(--body); font-size: 16px; }
+  .price { margin-top: auto; padding-top: 18px; font-size: 14px; font-weight: 700; color: var(--mute); font-variant-numeric: tabular-nums; }
+  .price b { color: var(--ink); font-size: 18px; }
+  .card.main { background: linear-gradient(160deg, rgba(255, 122, 0, 0.16), rgba(255, 255, 255, 0.7) 60%); border-color: rgba(255, 122, 0, 0.45); }
+  .chip { align-self: flex-start; font-size: 12px; font-weight: 800; padding: 5px 11px; border-radius: var(--r-pill); background: var(--accent); color: var(--ink); letter-spacing: 0.02em; }
+
+  /* Steps */
+  .steps { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; counter-reset: s; }
+  .steps li { counter-increment: s; border-radius: var(--r-lg); padding: 28px; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 18px; font-weight: 600; line-height: 1.4; letter-spacing: -0.01em; min-width: 0; }
+  .steps li::before { content: counter(s); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: var(--ink); font-weight: 800; font-size: 18px; margin-bottom: 20px; font-variant-numeric: tabular-nums; }
+
+  /* Cases */
+  .cases-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .chat { border-radius: var(--r-lg); padding: 22px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .chat-bar { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .chat-bar i { width: 10px; height: 10px; border-radius: 50%; background: #34C759; }
+  .bub { max-width: 92%; padding: 12px 16px; border-radius: 20px; font-size: 15px; line-height: 1.5; overflow-wrap: anywhere; }
+  .bub.me { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 6px; }
+  .bub.bot { align-self: flex-start; background: #fff; border: 1px solid var(--line); border-bottom-left-radius: 6px; }
+  .bub.bot b { color: var(--ink); }
+  .bub.bot ol { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 6px; }
+  .bub.bot li::marker { color: var(--accent); font-weight: 800; }
+  .chat-note { margin: 4px 0 0; font-size: 13px; color: var(--mute); }
+
+  /* Final CTA */
+  .final { padding-block: clamp(40px, 6vw, 72px) clamp(56px, 8vw, 96px); }
+  .cta { position: relative; overflow: hidden; border-radius: 40px; background: var(--ink); color: #fff; padding: clamp(36px, 7vw, 88px) clamp(22px, 6vw, 80px); }
+  .cta .blob { filter: blur(80px); }
+  .cta .blob.a { width: 340px; height: 340px; right: -60px; top: -100px; background: rgba(255, 122, 0, 0.5); }
+  .cta .blob.b { width: 300px; height: 300px; left: -80px; bottom: -140px; background: rgba(255, 255, 255, 0.12); }
+  .cta-in { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+  .cta h2 { color: #fff; max-width: 15em; margin-bottom: 8px; }
+  .cta .hint { margin: 0; font-size: 16px; font-weight: 600; color: rgba(255, 255, 255, 0.78); }
+  .cta .alt { margin: 6px 0 0; font-size: 16px; color: rgba(255, 255, 255, 0.78); }
+  .cta .alt a { color: #fff; font-weight: 700; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; overflow-wrap: anywhere; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding-block: 32px 40px; font-size: 15px; color: var(--body); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 32px; }
+  footer p { margin: 0; }
+  .foot-brand { display: flex; align-items: center; gap: 10px; }
+  .foot-logo { width: 32px; height: 32px; flex: none; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .links a { font-weight: 700; text-decoration: none; color: var(--ink); }
+  .links a:hover { color: var(--accent); }
+
+  /* Scroll reveal: виден по умолчанию, анимируется только там, где браузер умеет view timeline */
+  @keyframes rise { from { opacity: 0.25; transform: translateY(34px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 38%; }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn, .card { transition: none; }
+  }
+
+  @media (max-width: 820px) {
+    .hero-grid, .cases-grid { grid-template-columns: minmax(0, 1fr); }
+    .versus { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 480px) {
+    body { font-size: 16px; }
+    .actions .btn { width: 100%; }
+    .btn-xl { width: 100%; padding: 0 20px; font-size: 18px; }
+    .cta { border-radius: 28px; }
+  }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Aflans, на главную">
+      <img class="logo-img" src="aflans-logo.jpg" width="40" height="40" alt="">
+      Aflans
+    </a>
+    <a class="btn btn-accent btn-sm" href="https://t.me/aflans?direct">Связаться</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="hero">
+    <div class="blob a"></div><div class="blob b"></div><div class="blob c"></div>
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <p class="eyebrow"><i></i>Маркетинг и упаковка для IT-фаундеров</p>
+        <h1>Твой код ничего не стоит, если его <em>никто не покупает</em></h1>
+        <p class="lead">Мы упаковываем сложные IT и ИИ-продукты так, чтобы клиенты сами захотели платить. Без воды и маркетингового мусора.</p>
+        <div class="actions">
+          <a class="btn btn-accent" href="https://t.me/aflansbot">Получить бесплатный разбор</a>
+          <a class="btn btn-glass" href="https://t.me/aflans?direct">Обсудить проект</a>
+        </div>
+      </div>
+
+      <aside class="snap glass reveal" aria-label="Типичный расклад у фаундера до разбора">
+        <div class="snap-head">
+          <span class="snap-title">Типичный проект до разбора</span>
+          <span class="snap-tag">пример</span>
+        </div>
+        <div class="row"><span>Часов в коде</span><b>340</b></div>
+        <div class="row"><span>Фич в продукте</span><b>14</b></div>
+        <div class="row"><span>Интервью с клиентами</span><b class="zero">0</b></div>
+        <div class="row"><span>Страница с оффером</span><b class="zero">нет</b></div>
+        <div class="row"><span>Оплат</span><b class="zero">0 ₽</b></div>
+        <p class="snap-foot">Цифры иллюстрируют типичную ситуацию, это не данные конкретного клиента.</p>
+      </aside>
+    </div>
+  </div>
+
+  <section class="tint" id="problem">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="label">Почему ты здесь</p>
+        <h2>Ты пишешь код месяцами, а продаж нет</h2>
+        <p class="sec-text">Вайб-кодинг создал иллюзию, что продукт собрать легко. Но фичи не продают себя сами. Ты упаковываешь продукт для себя, а не для клиента.</p>
+      </div>
+      <div class="versus">
+        <div class="vs glass reveal">
+          <small>Как пишешь ты</small>
+          <p>RAG-пайплайн с векторным поиском на pgvector и кастомными эмбеддингами</p>
+        </div>
+        <div class="vs client reveal">
+          <small>Что читает клиент</small>
+          <p>Я не могу найти нужный ответ в своих документах за десять минут</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="label">Услуги</p>
+        <h2>Берем упаковку, код остается тебе</h2>
+      </div>
+      <div class="cards">
+        <article class="card glass reveal">
+          <h3>Лендинг-кит</h3>
+          <p>Переводим твой сложный продукт на язык болей клиента. Готовые тексты, структура и офферы.</p>
+          <div class="price">от <b>5 000 ₽</b></div>
+        </article>
+        <article class="card glass reveal">
+          <h3>Контент-пакет</h3>
+          <p>План на 2 недели, готовые посты и сценарии для Reels, чтобы получить первых клиентов без бюджета на рекламу.</p>
+          <div class="price">от <b>8 000 ₽</b></div>
+        </article>
+        <article class="card glass main reveal">
+          <span class="chip">Все сразу</span>
+          <h3>Полный запуск</h3>
+          <p>Лендинг + контент + стратегия вывода на рынок.</p>
+          <div class="price">от <b>15 000 ₽</b></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint" id="how">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="label">Как это работает</p>
+        <h2>Три шага от идеи до оплаты</h2>
+      </div>
+      <ol class="steps">
+        <li class="reveal">Ты кидаешь свою идею в нашего ИИ-бота.</li>
+        <li class="reveal">Бот делает экспресс-разбор и находит слабые места.</li>
+        <li class="reveal">Мы упаковываем твой продукт в понятную обертку, которая приносит деньги.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="cases">
+    <div class="wrap cases-grid">
+      <div class="reveal">
+        <p class="label">Кейсы</p>
+        <h2>Мы уже разобрали более 50 идей</h2>
+        <p class="sec-text">От DevTools для Cursor до маркетплейсов. Мы знаем, где фаундеры теряют деньги и клиентов.</p>
+      </div>
+      <div class="chat glass reveal" role="img" aria-label="Пример формата разбора идеи в Telegram-боте">
+        <div class="chat-bar"><i></i>@aflansbot</div>
+        <div class="bub me">Делаю плагин для Cursor, который ловит баги в промптах. Уже 14 фич, лендинга нет.</div>
+        <div class="bub bot">
+          <b>Экспресс-разбор. Три слабых места:</b>
+          <ol>
+            <li>Ты продаешь список фич. Клиент покупает сэкономленные часы.</li>
+            <li>Аудитория «все, кто пишет промпты» слишком широкая. Выбери одну роль.</li>
+            <li>Нет причины заплатить сегодня. Нужен оффер с понятным результатом.</li>
+          </ol>
+        </div>
+        <p class="chat-note">Иллюстрация формата разбора, это не реальная переписка.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="final">
+    <div class="wrap">
+      <div class="cta reveal">
+        <div class="blob a"></div><div class="blob b"></div>
+        <div class="cta-in">
+          <h2>Проверь свою идею до того, как потратишь еще один месяц впустую</h2>
+          <a class="btn btn-accent btn-xl" href="https://t.me/aflansbot">Скинуть идею боту</a>
+          <p class="hint">Это займет 1 минуту. Бесплатно. Без воды.</p>
+          <p class="alt">Или свяжись с нами напрямую: <a href="https://t.me/aflans?direct">t.me/aflans</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-brand"><img class="logo-img foot-logo" src="aflans-logo.jpg" width="32" height="32" alt="">© 2026 Aflans. Говорим жестко, но по делу.</p>
+    <nav class="links" aria-label="Telegram">
+      <a href="https://t.me/aflansbot">Бот @aflansbot</a>
+      <a href="https://t.me/aflans?direct">Написать в Telegram</a>
+    </nav>
+  </div>
+</footer>
+
+</body></html>
