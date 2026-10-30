@@ -5,12 +5,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 <style>
-  /* Layout: один спокойный скролл, левое выравнивание, стеклянные карточки на мягких цветовых пятнах. Тема одна, светлая, по брифу. */
+  /* Layout: B2B, один спокойный скролл, левое выравнивание, стеклянные карточки на мягких цветовых пятнах. Тема одна, светлая. Оранжевые кнопки ведут к продаже, прозрачные с синей рамкой только навигируют. */
   :root {
     --bg: #FFFFFF;
     --ink: #0A255C;
     --accent: #FF7A00;
-    --mute: #8A8A8E;
+    --mute: #6E788C;
     --body: #43557C;
     --surface: #F3F6FC;
     --line: rgba(10, 37, 92, 0.10);
@@ -51,7 +51,7 @@
 
   .wrap {
     width: 100%;
-    max-width: 1040px;
+    max-width: 1080px;
     margin-inline: auto;
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -67,24 +67,31 @@
     -webkit-backdrop-filter: blur(18px) saturate(1.4);
     border-bottom: 1px solid var(--line);
   }
-  .top .wrap { display: flex; align-items: center; padding-block: 10px; }
-  .logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; text-decoration: none; }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; text-decoration: none; color: var(--ink); }
   .logo-img { height: 36px; width: auto; max-width: none; object-fit: contain; display: block; background: none; border: 0; }
+  .nav { display: flex; align-items: center; gap: 28px; }
+  .nav-link { font-weight: 600; font-size: 15px; text-decoration: none; color: var(--body); }
+  .nav-link:hover { color: var(--ink); }
 
   /* Buttons */
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     min-height: 52px; padding: 0 28px;
     border-radius: var(--r-pill);
-    font: 700 17px/1 var(--font);
+    font: 700 17px/1.2 var(--font);
     text-decoration: none;
     border: 1px solid transparent;
-    transition: transform .2s ease, box-shadow .2s ease;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
     cursor: pointer;
+    text-align: center;
   }
   .btn:hover { transform: translateY(-2px); }
   .btn-accent { background: var(--accent); color: var(--ink); box-shadow: 0 12px 28px -10px rgba(255, 122, 0, 0.7); }
   .btn-accent:hover { box-shadow: 0 16px 34px -10px rgba(255, 122, 0, 0.85); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn-ghost:hover { background: rgba(10, 37, 92, 0.05); }
+  .btn-sm { min-height: 40px; padding: 0 20px; font-size: 15px; }
   .btn-xl { min-height: 64px; padding: 0 40px; font-size: 19px; }
 
   /* Hero */
@@ -93,16 +100,16 @@
   .blob.a { width: 420px; height: 420px; right: -80px; top: -60px; background: rgba(255, 122, 0, 0.30); }
   .blob.b { width: 360px; height: 360px; right: 18%; bottom: -140px; background: rgba(10, 37, 92, 0.16); }
   .blob.c { width: 260px; height: 260px; left: -90px; top: 30%; background: rgba(255, 122, 0, 0.14); }
-  .hero-in { position: relative; max-width: 800px; }
-  h1 { font-size: clamp(36px, 6.4vw, 70px); line-height: 1.06; letter-spacing: -0.035em; font-weight: 800; margin: 0 0 24px; text-wrap: balance; }
-  h1 em { font-style: normal; color: var(--accent); }
-  .lead { font-size: clamp(19px, 2.4vw, 23px); color: var(--body); max-width: 28em; margin: 0 0 36px; }
+  .hero-in { position: relative; max-width: 840px; }
+  h1 { font-size: clamp(36px, 6.2vw, 68px); line-height: 1.06; letter-spacing: -0.035em; font-weight: 800; margin: 0 0 24px; text-wrap: balance; }
+  .lead { font-size: clamp(18px, 2.2vw, 21px); color: var(--body); max-width: 33em; margin: 0 0 36px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
   /* Sections */
   section { padding-block: clamp(56px, 8vw, 104px); }
   .tint { background: var(--surface); }
   h2 { font-size: clamp(28px, 4.4vw, 48px); line-height: 1.1; letter-spacing: -0.03em; font-weight: 800; margin: 0 0 20px; text-wrap: balance; max-width: 18em; }
-  .sec-text { font-size: clamp(18px, 2.1vw, 21px); color: var(--body); max-width: 33em; margin: 0; }
+  .sec-text { font-size: clamp(18px, 2.1vw, 22px); color: var(--body); max-width: 33em; margin: 0; }
   .label { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
 
   .glass {
@@ -113,6 +120,12 @@
     -webkit-backdrop-filter: blur(22px) saturate(1.5);
   }
 
+  /* Problem: крупная карточка */
+  .problem { position: relative; overflow: hidden; border-radius: 40px; padding: clamp(32px, 7vw, 88px); min-height: min(78vh, 620px); display: flex; align-items: center; background: var(--surface); }
+  .problem .blob.a { width: 340px; height: 340px; right: -90px; top: -100px; background: rgba(255, 122, 0, 0.24); }
+  .problem .blob.b { width: 280px; height: 280px; left: -80px; bottom: -120px; background: rgba(10, 37, 92, 0.10); }
+  .problem-in { position: relative; }
+
   /* Steps */
   .steps { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; counter-reset: s; }
   .steps li { counter-increment: s; border-radius: var(--r-lg); padding: 30px 28px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
@@ -120,29 +133,47 @@
   .steps h3 { margin: 0; font-size: 23px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 800; }
   .steps p { margin: 0; font-size: 17px; color: var(--body); line-height: 1.55; }
 
-  /* Offer */
-  .offer { padding-block: clamp(40px, 6vw, 72px) clamp(56px, 8vw, 96px); }
+  /* Services */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; margin-top: 44px; align-items: stretch; }
+  .card { border-radius: var(--r-lg); padding: 30px 28px; display: flex; flex-direction: column; gap: 14px; min-width: 0; transition: transform .25s ease; }
+  .card:hover { transform: translateY(-4px); }
+  .card h3 { margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 800; }
+  .card > p { margin: 0; color: var(--body); font-size: 16px; line-height: 1.55; }
+  .incl-title { margin: 4px 0 0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); }
+  .incl { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .incl li { position: relative; padding-left: 22px; font-size: 15px; line-height: 1.45; color: var(--body); }
+  .incl li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+  .card-end { display: flex; flex-direction: column; gap: 16px; margin-top: auto; padding-top: 10px; }
+  .price { display: flex; flex-direction: column; gap: 2px; font-variant-numeric: tabular-nums; }
+  .price .big { font-size: 30px; line-height: 1.1; font-weight: 800; letter-spacing: -0.02em; }
+  .price .big.sm { font-size: 22px; line-height: 1.25; }
+  .price .note { font-size: 14px; color: var(--mute); font-weight: 600; line-height: 1.45; }
+  .price .note s { text-decoration-thickness: 2px; }
+  .card.main { background: linear-gradient(160deg, rgba(255, 122, 0, 0.12), rgba(255, 255, 255, 0.75) 60%); border: 2px solid var(--accent); }
+  .chip { align-self: flex-start; font-size: 12px; font-weight: 800; padding: 5px 11px; border-radius: var(--r-pill); background: var(--accent); color: var(--ink); letter-spacing: 0.02em; }
+
+  /* Final CTA */
+  .final { padding-block: clamp(40px, 6vw, 72px) clamp(56px, 8vw, 96px); }
   .cta { position: relative; overflow: hidden; border-radius: 40px; background: var(--ink); color: #fff; padding: clamp(36px, 7vw, 88px) clamp(22px, 6vw, 80px); }
   .cta .blob { filter: blur(80px); }
   .cta .blob.a { width: 340px; height: 340px; right: -60px; top: -100px; background: rgba(255, 122, 0, 0.5); }
   .cta .blob.b { width: 300px; height: 300px; left: -80px; bottom: -140px; background: rgba(255, 255, 255, 0.12); }
   .cta-in { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
-  .cta .label { margin: 0; }
   .cta h2 { color: #fff; max-width: 14em; margin: 0; }
   .cta .text { margin: 0; max-width: 33em; font-size: clamp(18px, 2.1vw, 21px); color: rgba(255, 255, 255, 0.84); }
-  .cta .text b { color: #fff; }
+  .cta .alt { margin: 0; font-size: 15px; color: rgba(255, 255, 255, 0.78); }
+  .cta .alt a { color: #fff; font-weight: 700; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; overflow-wrap: anywhere; }
 
   /* Footer */
-  footer { border-top: 1px solid var(--line); padding-block: 40px 48px; }
-  footer .wrap { display: flex; flex-direction: column; gap: 18px; }
-  .foot-q { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; max-width: 24em; }
-  .foot-q + .foot-q { margin-top: -6px; }
-  .inline { color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
-  .links { display: flex; flex-wrap: wrap; gap: 12px; }
-  .link-pill { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: var(--r-pill); border: 1px solid var(--line); background: var(--surface); font-weight: 700; font-size: 16px; text-decoration: none; color: var(--ink); overflow-wrap: anywhere; transition: border-color .2s ease, color .2s ease; }
-  .link-pill:hover { border-color: var(--accent); color: var(--accent); }
-  .copy { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--mute); }
-  .copy .logo-img { height: 24px; width: auto; }
+  footer { border-top: 1px solid var(--line); padding-block: 36px 48px; }
+  footer .wrap { display: flex; flex-direction: column; gap: 16px; }
+  .foot-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px; }
+  .copy { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; }
+  .copy .logo-img { height: 24px; }
+  .links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 15px; font-weight: 700; color: var(--mute); }
+  .links a { color: var(--ink); text-decoration: none; }
+  .links a:hover { color: var(--accent); }
+  .disc { margin: 0; max-width: 56em; font-size: 12px; line-height: 1.6; color: #6E788C; }
 
   /* Scroll reveal: виден по умолчанию, анимируется только там, где браузер умеет view timeline */
   @keyframes rise { from { opacity: 0.25; transform: translateY(34px); } to { opacity: 1; transform: none; } }
@@ -153,13 +184,40 @@
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .btn { transition: none; }
+    .btn, .card { transition: none; }
   }
 
+  @media (max-width: 640px) {
+    .nav-link { display: none; }
+  }
   @media (max-width: 480px) {
     body { font-size: 17px; }
-    .hero .btn, .btn-xl { width: 100%; padding: 0 20px; }
-    .cta { border-radius: 28px; }
+    .actions .btn, .btn-xl, .card .btn { width: 100%; padding: 0 20px; }
+    .cta, .problem { border-radius: 28px; }
+    .logo { font-size: 18px; }
+    .top .btn-sm { padding: 0 14px; font-size: 14px; }
+  }
+
+  /* Печать: чистая страница без размытия, анимаций и закрепленной шапки */
+  @media print {
+    @page { margin: 14mm; }
+    html { scroll-behavior: auto; }
+    body { font-size: 12pt; background: #fff; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body::before, .blob, .nav-link { display: none !important; }
+    .top { position: static; backdrop-filter: none; -webkit-backdrop-filter: none; background: #fff; }
+    .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .glass, .card, .steps li { backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; background: #fff; border: 1px solid #c9d0de; }
+    .card.main { border: 2px solid var(--accent); }
+    .btn { box-shadow: none; transform: none; }
+    .btn-ghost { display: none; }
+    .hero { padding-block: 24px; overflow: visible; }
+    section, .final { padding-block: 24px; }
+    .problem { min-height: 0; background: #fff; border: 1px solid #c9d0de; break-inside: avoid; }
+    .cta { background: var(--ink); color: #fff; break-inside: avoid; }
+    .card, .steps li { break-inside: avoid; }
+    .cta .alt a::after, .links a::after { content: " (" attr(href) ")"; font-weight: 500; }
+    .links a::after { color: var(--mute); }
+    .disc { color: #4c566b; }
   }
 </style>
 
@@ -167,8 +225,12 @@
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Aflans, наверх">
       <img class="logo-img" src="aflans-logo.png" alt="">
-      Aflans
+      <span>Aflans</span>
     </a>
+    <nav class="nav" aria-label="Меню">
+      <a class="nav-link" href="#how">Что входит в работу</a>
+      <a class="btn btn-accent btn-sm" href="https://t.me/aflansbot">Скинуть идею боту</a>
+    </nav>
   </div>
 </header>
 
@@ -178,61 +240,119 @@
     <div class="blob a"></div><div class="blob b"></div><div class="blob c"></div>
     <div class="wrap">
       <div class="hero-in reveal">
-        <h1>Твой код работает. Но <em>за него не платят?</em></h1>
-        <p class="lead">Ты написал крутое приложение в Cursor, но клиенты проходят мимо. Мы знаем, как это исправить. Без магии и сложных терминов.</p>
-        <a class="btn btn-accent" href="#how">Как это работает</a>
+        <h1>Вы создали продукт. <span style="color:#FF7A00">Поможем рассказать о нём людям.</span></h1>
+        <p class="lead">Разберём, как представить ваш проект, объяснить его ценность и заинтересовать подходящую аудиторию. Независимо от того, создаёте вы бизнес, сервис или собственный эксперимент.</p>
+        <div class="actions">
+          <a class="btn btn-accent" href="https://t.me/aflansbot">Скинуть идею боту</a>
+          <a class="btn btn-ghost" href="#how">Что входит в работу</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <section class="tint" id="why">
-    <div class="wrap reveal">
-      <p class="label">Почему так происходит</p>
-      <h2>Ты писал код для себя, а не для клиента</h2>
-      <p class="sec-text">Ты месяц сидел в Claude Code и сделал идеальный продукт. А когда выложил его, получил 0 сообщений. Обидно? Да. Но клиенту все равно, какие у тебя крутые фичи. Ему нужно решить свою проблему. А твой сайт на языке технологий ему непонятен.</p>
-    </div>
-  </section>
-
-  <section id="what">
-    <div class="wrap reveal">
-      <p class="label">Что мы делаем</p>
-      <h2>Мы переводим твой код на язык денег</h2>
-      <p class="sec-text">Мы берем твой сложный IT-продукт и упаковываем его так, чтобы обычный человек понял: «О, это мне нужно, я готов за это заплатить». Мы пишем тексты, которые продают.</p>
+  <section id="problem">
+    <div class="wrap">
+      <div class="problem reveal">
+        <div class="blob a"></div><div class="blob b"></div>
+        <div class="problem-in">
+          <p class="label">В чём проблема</p>
+          <h2>Почему ваш продукт не покупают?</h2>
+          <p class="sec-text">Вы вложили месяцы в разработку. Сделали сложный функционал и красивый интерфейс. Но клиенты проходят мимо. Не потому что код плохой. А потому что вы продаёте «фичи», а клиент ищет решение своей боли. Мы переводим технический язык на язык денег.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="tint" id="how">
     <div class="wrap">
       <div class="reveal">
-        <p class="label">Как это работает</p>
-        <h2>Три шага от кода до клиентов</h2>
+        <p class="label">Что входит в работу</p>
+        <h2>Три шага от идеи до первых клиентов</h2>
       </div>
       <ol class="steps">
         <li class="glass reveal">
-          <h3>Разбираем идею</h3>
-          <p>Скидываешь идею нашему боту, он находит дыры.</p>
+          <h3>Аудит идеи</h3>
+          <p>Разбираем ваш продукт с помощью ИИ-бота. Находим слабые места и слепые зоны.</p>
         </li>
         <li class="glass reveal">
-          <h3>Переписываем текст</h3>
-          <p>Мы даем готовую структуру сайта и продающие тексты.</p>
+          <h3>Упаковка смыслов</h3>
+          <p>Переписываем тексты и структуру сайта так, чтобы они доносили ценность продукта за 5 секунд.</p>
         </li>
         <li class="glass reveal">
-          <h3>Ты получаешь клиентов</h3>
-          <p>Твой продукт начинают понимать и покупать.</p>
+          <h3>План запуска</h3>
+          <p>Даём пошаговый план, где искать первых клиентов без бюджета на рекламу.</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <div class="offer" id="offer">
+  <section id="services">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="label">Услуги и цены</p>
+        <h2>Сколько это стоит</h2>
+      </div>
+      <div class="cards">
+
+        <article class="card glass reveal">
+          <h3>Аудит идеи</h3>
+          <p>Разбор вашего продукта через бота. Находим слабые места и слепые зоны.</p>
+          <div class="card-end">
+            <div class="price"><span class="big">Бесплатно</span></div>
+            <a class="btn btn-accent" href="https://t.me/aflansbot">Скинуть идею в бот</a>
+          </div>
+        </article>
+
+        <article class="card glass main reveal">
+          <span class="chip">Пилот</span>
+          <h3>Пилотная упаковка</h3>
+          <p>Полная переупаковка вашего продукта, чтобы он продавал.</p>
+          <p class="incl-title">Что входит</p>
+          <ul class="incl">
+            <li>Готовый HTML-код лендинга</li>
+            <li>Тексты всех блоков (перевод фич на язык выгоды)</li>
+            <li>План действий, где искать первых клиентов</li>
+          </ul>
+          <div class="card-end">
+            <div class="price">
+              <span class="big">3 000 ₽</span>
+              <span class="note">вместо <s>10 000 ₽</s>, взамен просим только текстовый отзыв</span>
+            </div>
+            <a class="btn btn-accent" href="https://t.me/aflans?direct">Обсудить пилот</a>
+          </div>
+        </article>
+
+        <article class="card glass reveal">
+          <h3>Полный пакет «Под ключ»</h3>
+          <p>Комплексный вывод продукта на рынок с индивидуальной стратегией.</p>
+          <p class="incl-title">Что входит</p>
+          <ul class="incl">
+            <li>Глубокий аудит продукта и анализ конкурентов</li>
+            <li>Переупаковка лендинга (HTML-код + продающие тексты)</li>
+            <li>Разработка стратегии позиционирования (УТП)</li>
+            <li>Формирование базы целевых ЛПР (собираем контакты директоров/владельцев)</li>
+            <li>Разработка скриптов для холодных продаж (что и как им писать)</li>
+            <li>Контент-стратегия для запуска (план публикаций на первый месяц)</li>
+          </ul>
+          <div class="card-end">
+            <div class="price"><span class="big sm">Стоимость обсуждается индивидуально</span></div>
+            <a class="btn btn-ghost" href="https://t.me/aflans?direct">Обсудить проект</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="final">
     <div class="wrap">
       <div class="cta reveal">
         <div class="blob a"></div><div class="blob b"></div>
         <div class="cta-in">
-          <p class="label">Наше честное предложение</p>
-          <h2>Мы в начале пути. И нам нужны кейсы.</h2>
-          <p class="text">У нас пока нет огромного портфолио. Стандартная цена упаковки — <b>10 000 рублей</b>. Но сейчас мы ищем 3 проекта, чтобы собрать кейсы. Для них цена — <b>3 000 рублей</b>. Взамен мы попросим только  короткий отзыв (в текстовом или видео формате, как вам удобнее) и разрешение показать ваш проект в портфолио. Нам нужны кейсы, вам — клиенты.</p>
-          <a class="btn btn-accent btn-xl" href="https://t.me/aflans?direct">Стать одним из 3 проектов</a>
+          <h2>Хватит строить в пустоту.</h2>
+          <p class="text">Проверьте свою идею до того, как потратите ещё один месяц. Это займёт 1 минуту.</p>
+          <a class="btn btn-accent btn-xl" href="https://t.me/aflansbot">Проверить идею в боте</a>
+          <p class="alt">Или напишите напрямую: <a href="https://t.me/aflans?direct">t.me/aflans</a></p>
         </div>
       </div>
     </div>
@@ -242,12 +362,15 @@
 
 <footer>
   <div class="wrap">
-    <p class="foot-q">Скинь свою идею в бота-аналитика: <a class="inline" href="https://t.me/aflansbot">@aflansbot</a></p>
-    <p class="foot-q">Или напиши нам напрямую в Telegram.</p>
-    <nav class="links" aria-label="Контакты">
-      <a class="link-pill" href="https://t.me/aflans?direct">t.me/aflans</a>
-    </nav>
-    <p class="copy"><img class="logo-img" src="aflans-logo.png" alt="">© 2026 Aflans</p>
+    <div class="foot-top">
+      <p class="copy"><img class="logo-img" src="aflans-logo.png" alt="">Aflans © 2026</p>
+      <nav class="links" aria-label="Контакты">
+        <a href="https://t.me/aflansbot">@aflansbot</a>
+        <span aria-hidden="true">|</span>
+        <a href="https://t.me/aflans?direct">Связаться</a>
+      </nav>
+    </div>
+    <p class="disc">Данный сайт носит информационный характер. Aflans оказывает услуги по упаковке и продвижению IT-продуктов. Мы не гарантируем конкретных финансовых результатов, так как они зависят от качества продукта и работы команды клиента.</p>
   </div>
 </footer>
 
